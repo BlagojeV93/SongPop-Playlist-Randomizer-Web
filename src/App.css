@@ -1,5 +1,11 @@
-.App {
-  text-align: center;
+.app {
+  background-image:url('./assets/sppic.png');
+  background-repeat:no-repeat;
+  background-position: center;
+  background-size: 70vh 50vh;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
