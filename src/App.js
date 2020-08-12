@@ -13,7 +13,7 @@ import backDarkPic from './assets/back-dark.png'
 
 const corseHelperUri = 'https://cors-anywhere.herokuapp.com/'
 const regularFileUri = 'https://songpophost.000webhostapp.com/allPlaylists.txt'
-const specialUri = 'https://songpophost.000webhostapp.com/speciall.txt'
+const specialUri = 'https://songpophost.000webhostapp.com/special.txt'
 const options = [50, 60, 70, 90, 100, 150];
 
 const customModalStyle = {
@@ -50,7 +50,9 @@ function App() {
   }, [])
 
   const getLists = async () => {
-    let content = await fetch(corseHelperUri + regularFileUri).then(res => res.text());
+    let content = await fetch(corseHelperUri + regularFileUri, {
+      cache: "no-cache"
+    }).then(res => res.text());
     content = content.split('•');
     content.shift();
     setAll(prevContent => {
@@ -63,7 +65,7 @@ function App() {
   }
 
   const getSpecialLists = async (uri) => {
-    let lists = await fetch(corseHelperUri + uri).then(res => res.status === 200 ? res.text() : null)
+    let lists = await fetch(corseHelperUri + uri, { cache: "no-cache" }).then(res => res.status === 200 ? res.text() : null)
       .catch(e => console.log(e, 'error special fetch'));
     if (lists) {
       lists = lists.split('•');
@@ -199,7 +201,7 @@ function App() {
           }
         })}
         <button onClick={() => onModalOptionClick(0)} className="tournamentOptionCont backToRegularBtn">
-          <img src={backDarkPic} className="btnImage"/>
+          <img src={backDarkPic} className="btnImage" />
           <p className="tournamentOptionText">REGULAR LISTS</p>
         </button>
       </div>
