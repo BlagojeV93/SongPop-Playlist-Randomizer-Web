@@ -16,7 +16,7 @@ const regularFileUri = 'https://songpophost.000webhostapp.com/allPlaylists.txt'
 const specialUri = 'https://songpophost.000webhostapp.com/speciall.txt'
 const options = [50, 60, 70, 90, 100, 150];
 
-const customStyles = {
+const customModalStyle = {
   overlay: {
     backgroundColor: 'rgba(0,0,0,0.8)'
   },
@@ -212,7 +212,7 @@ function App() {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setIsOpen(false)}
-        style={customStyles}
+        style={customModalStyle}
         closeTimeoutMS={700}
       >
         {renderModalCont()}
