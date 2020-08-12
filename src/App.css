@@ -5,6 +5,7 @@ p{
 button{
   outline: none;
   cursor: pointer;
+  margin: 0;
 }
 
 .appMain {
@@ -30,12 +31,14 @@ button{
 }
 
 .numberofListsCont {
-  height: 50%;
+  height: 60%;
   width: 100%;
   display:  flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 }
+
 .numberofListsText {
   font-size: 28px;
   font-weight: bold;
@@ -51,6 +54,7 @@ button{
   text-shadow: 2px 2px #000;
   margin-bottom: 10px;
 }
+
 .optionsNumber{
   height: 15%;
   display: flex;
@@ -133,6 +137,75 @@ button{
   text-align: center;
 }
 
+.loadingCont{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.loadingText{
+  color: whitesmoke;
+  font-size: 18px;
+}
+
+.sk-spinner {
+  transform: scale(0.8);
+  margin-top: 50px;
+}
+
+.specialTournamentsCont {
+  display: flex;
+  height: 30%;
+  background-color: rgba(0,0,0,0.8);
+  align-items: center;
+  padding: 0px 10px;
+  -webkit-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
+.specialTournamentsTitle{
+  font-size: 14px;
+  margin: 0px 10px;
+  color: white;
+  text-align: center;
+}
+
+.mainModalCont{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitleText{
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.tournamentOptionCont{
+  display: flex;
+  background-color: #EFEFEF;
+  align-items: center;
+  width: 100%;
+  border-top: 2px solid;
+  padding: 15px;
+}
+
+.tournamentOptionText{
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.backToRegularBtn{
+  border: 0px;
+  background-color: rgb(200, 200, 200);
+}
+
 @media only screen and (min-width: 768px) {
   .numberofListsText {
     font-size: 50px;
@@ -155,6 +228,27 @@ button{
     font-size: 26px;
     margin: 30px 0px;
   }
+  .loadingText{
+    font-size: 30px;
+  }
+  .specialTournamentsCont {
+    padding: 0px 25px;
+  }
+  .specialTournamentsTitle{
+    font-size: 26px;
+    margin: 0px 25px;
+  }
+  .modalTitleText{
+    font-size: 24px;
+    margin: 40px;
+  }
+  .tournamentOptionCont{
+    padding: 25px;
+  }
+  .tournamentOptionText{
+    font-size: 22px;
+    margin-left: 20px;
+  }
 }
 
 @media only screen and (min-width: 1025px) {
@@ -166,6 +260,9 @@ button{
   }
   .playlistNameText{
     font-size: 27px;
+  }
+  .mainModalCont{
+    width: 60vw;
   }
 }
 
@@ -197,4 +294,28 @@ button{
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 700ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0;
 }

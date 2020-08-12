@@ -2,33 +2,92 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import ScrollArea from 'react-scrollbar'
-import { Message, GenericTemplate, GenericElement, ShareButton } from 'react-messenger-ui';
+import Spinner from 'react-spinkit'
+import Modal from 'react-modal';
 
 import sharePic from './assets/share.png'
 import backPic from './assets/back.png'
+import tournamentPic from './assets/cup.png'
+import tournamentPicDark from './assets/cup-dark.png'
+import backDarkPic from './assets/back-dark.png'
 
-const fetchUri = 'https://cors-anywhere.herokuapp.com/https://songpophost.000webhostapp.com/allPlaylists.txt'
-const options = [60, 70, 90, 100, 150]
+const corseHelperUri = 'https://cors-anywhere.herokuapp.com/'
+const regularFileUri = 'https://songpophost.000webhostapp.com/allPlaylists.txt'
+const specialUri = 'https://songpophost.000webhostapp.com/speciall.txt'
+const options = [50, 60, 70, 90, 100, 150];
+
+const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.8)'
+  },
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'rgba(220,220,220)',
+    padding: 0
+  }
+};
+
+Modal.setAppElement(document.getElementById('root'));
 
 function App() {
-
-  const [allPlaylists, setAll] = useState([0]);
+  const [allPlaylists, setAll] = useState([]);
   const [randomizedPlaylists, choosePlaylists] = useState([]);
   const [numberToRandomize, setNumber] = useState(options[0]);
+  const [indicator, loading] = useState(false);
+  const [chosenListsOrdinal, setBool] = useState(0);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const listsToShow = allPlaylists.length > 0 ? allPlaylists[chosenListsOrdinal].lists : [];
 
   useEffect(() => {
+    loading(true);
     getLists();
   }, [])
 
   const getLists = async () => {
-    const content = await fetch(fetchUri).then(res => res.text());
-    setAll(content.split('•'));
+    let content = await fetch(corseHelperUri + regularFileUri).then(res => res.text());
+    content = content.split('•');
+    content.shift();
+    setAll(prevContent => {
+      let arr = [...prevContent];
+      arr.push({ title: 'Regular Lists', lists: content })
+      return arr;
+    })
+    await getSpecialLists(specialUri);
+    loading(false);
+  }
+
+  const getSpecialLists = async (uri) => {
+    let lists = await fetch(corseHelperUri + uri).then(res => res.status === 200 ? res.text() : null)
+      .catch(e => console.log(e, 'error special fetch'));
+    if (lists) {
+      lists = lists.split('•');
+      lists.shift();
+      const uri = lists[1].trim();
+      const title = lists[0].trim();
+      lists.splice(0, 2);
+
+      setAll(prevContent => {
+        let arr = [...prevContent];
+        arr.push({ title, lists })
+        return arr;
+      })
+
+      if (uri != 'null') {
+        getSpecialLists(uri)
+      }
+    }
   }
 
   const randomizeLists = () => {
     let stateArr = [];
     do {
-      let val = allPlaylists[Math.floor(Math.random() * allPlaylists.length)].trim();
+      let val = listsToShow[Math.floor(Math.random() * listsToShow.length)].trim();
       if (stateArr.indexOf(val) === -1 && val.length > 0) {
         stateArr.push(val);
       }
@@ -38,70 +97,126 @@ function App() {
   }
 
   const renderOptionButtons = options.map((opt, i) => {
-    const borderLeftWidth = i == 0 ? 2 : 1;
-    const borderRightWidth = i == options.length - 1 ? 2 : 1;
-    const backgroundColor = opt == numberToRandomize ? 'purple' : '#739fff';
+    const borderLeftWidth = i === 0 ? 2 : 1;
+    const borderRightWidth = i === options.length - 1 ? 2 : 1;
+    const backgroundColor = opt === numberToRandomize ? 'purple' : '#739fff';
     return (
-      <button onClick={() => setNumber(opt)} className="singleOptionBtn" style={{ borderLeftWidth, borderRightWidth, backgroundColor }} key={i}>
+      <button disabled={opt > listsToShow.length} onClick={() => setNumber(opt)} className="singleOptionBtn" style={{ borderLeftWidth, borderRightWidth, backgroundColor }} key={i}>
         <p className="optionNumberText">{opt}</p>
       </button>
     )
   })
 
-  const renderRandomizedPlaylists = randomizedPlaylists.map((el, i) => {
-    return (
-      <p key={i} className="playlistNameText">{el}</p>
-    )
-  })
+  const topListsTitle = chosenListsOrdinal == 0 ? 'Click here for monthly tournaments!' : 'Change playlists'
 
   const renderMainContent = () => {
-    if (randomizedPlaylists.length > 0) {
-      return (
-        <div className="secondScreenMainCont">
-          <ScrollArea
-            speed={0.8}
-            className='randomizedListsCont'
-            horizontal={false}
-            verticalScrollbarStyle={{ backgroundColor: 'white' }}
-          >
-            {renderRandomizedPlaylists}
-          </ScrollArea>
-          <button className="secondScreenBtns" style={{ backgroundColor: 'blue' }}>
-            <img src={sharePic} className="btnImage" />
-            <p className="secondScreenBtnsText">SHARE</p>
-          </button>
-          <button onClick={() => choosePlaylists([])} className="secondScreenBtns" style={{ backgroundColor: 'purple' }}>
-            <img src={backPic} className="btnImage" />
-            <p className="secondScreenBtnsText">RANDOMIZE AGAIN</p>
-          </button>
-        </div>
-      )
-    } else {
-      return (
-        <div className="mainInner">
-          <div className="innerTop">
-            <div className="numberofListsCont">
-              <p className='numberofListsText'>Total of {allPlaylists.length - 1} lists loaded</p>
-            </div>
-            <p className='chooseAmountText'>Choose the number of playlists to randomize</p>
-            <div className='optionsNumber'>
-              {renderOptionButtons}
-            </div>
-          </div>
-          <div className="innerBottom">
-            <button onClick={() => randomizeLists()} className='randomizeBtn'>
-              <p className="optionNumberText">RANDOMIZE</p>
+    if (!indicator) {
+      if (randomizedPlaylists.length > 0) {
+        return (
+          <div className="secondScreenMainCont">
+            <ScrollArea
+              speed={0.8}
+              className='randomizedListsCont'
+              horizontal={false}
+              verticalScrollbarStyle={{ backgroundColor: 'white' }}
+            >
+              {randomizedPlaylists.map((el, i) => {
+                return (
+                  <p key={i} className="playlistNameText">{el}</p>
+                )
+              })}
+            </ScrollArea>
+            <button className="secondScreenBtns" style={{ backgroundColor: 'blue' }}>
+              <img src={sharePic} className="btnImage" />
+              <p className="secondScreenBtnsText">SHARE</p>
+            </button>
+            <button onClick={() => choosePlaylists([])} className="secondScreenBtns" style={{ backgroundColor: 'purple' }}>
+              <img src={backPic} className="btnImage" />
+              <p className="secondScreenBtnsText">RANDOMIZE AGAIN</p>
             </button>
           </div>
-          
+        )
+      } else {
+        return (
+          <div className="mainInner">
+            <div className="innerTop">
+              <div className="numberofListsCont">
+                {allPlaylists.length > 1 &&
+                  <button onClick={() => setIsOpen(true)} className="specialTournamentsCont">
+                    <img src={tournamentPic} className="btnImage" />
+                    <p className="specialTournamentsTitle">{topListsTitle}</p>
+                    <img src={tournamentPic} className="btnImage" />
+                  </button>
+                }
+                <p className='numberofListsText'>Total of {listsToShow.length} lists loaded</p>
+              </div>
+              <p className='chooseAmountText'>Choose the number of playlists to randomize</p>
+              <div className='optionsNumber'>
+                {renderOptionButtons}
+              </div>
+            </div>
+            <div className="innerBottom">
+              <button onClick={() => randomizeLists()} className='randomizeBtn'>
+                <p className="optionNumberText">RANDOMIZE</p>
+              </button>
+            </div>
+
+          </div>
+        )
+      }
+    } else {
+      return (
+        <div className="loadingCont">
+          <p className='loadingText'>Loading all playlists...Please wait...</p>
+          <Spinner name='ball-spin-fade-loader' fadeIn='none' color='white' />
         </div>
       )
     }
   }
 
+  const onModalOptionClick = (i) => {
+    setBool(i);
+    setIsOpen(false);
+    setNumber(options[0]);
+  }
+
+  const renderModalCont = () => {
+    const titles = allPlaylists.map((e => e.title));
+    return (
+      <div className="mainModalCont">
+        <p className="modalTitleText">
+          You can select one of the active monthly tournaments below and randomize playlists for that special event!
+    </p>
+        {titles.map((title, i) => {
+          if (i > 0) {
+            const last = i == titles.length - 1;
+            return (
+              <button onClick={() => onModalOptionClick(i)} key={i} className="tournamentOptionCont" style={{ borderBottomWidth: last ? 2 : 0 }}>
+                <img src={tournamentPicDark} className="btnImage" />
+                <p className="tournamentOptionText">{title}</p>
+              </button>
+            )
+          }
+        })}
+        <button onClick={() => onModalOptionClick(0)} className="tournamentOptionCont backToRegularBtn">
+          <img src={backDarkPic} className="btnImage"/>
+          <p className="tournamentOptionText">REGULAR LISTS</p>
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className="appMain">
       {renderMainContent()}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setIsOpen(false)}
+        style={customStyles}
+        closeTimeoutMS={700}
+      >
+        {renderModalCont()}
+      </Modal>
     </div>
 
   );
