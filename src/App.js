@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 import ScrollArea from 'react-scrollbar'
 import Spinner from 'react-spinkit'
 import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import sharePic from './assets/share.png'
+import copyPic from './assets/copy.png'
 import backPic from './assets/back.png'
 import tournamentPic from './assets/cup.png'
 import tournamentPicDark from './assets/cup-dark.png'
@@ -43,6 +45,7 @@ function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const listsToShow = allPlaylists.length > 0 ? allPlaylists[chosenListsOrdinal].lists : [];
+  const textarea = useRef();
 
   useEffect(() => {
     loading(true);
@@ -80,7 +83,7 @@ function App() {
         return arr;
       })
 
-      if (uri != 'null') {
+      if (uri !== 'null') {
         getSpecialLists(uri)
       }
     }
@@ -107,13 +110,25 @@ function App() {
         <p className="optionNumberText">{opt}</p>
       </button>
     )
-  })
+  });
 
-  const topListsTitle = chosenListsOrdinal == 0 ? 'Click here for monthly tournaments!' : 'Change playlists'
+  const copyToClipboard = () => {
+    let copyText = textarea.current;
+    copyText.select();
+    document.execCommand("copy");
+    toast("All lists copied to clipboard! Good luck!", { toastId: 'custom-id-yes' })
+  }
+
+  const topListsTitle = chosenListsOrdinal === 0 ? 'Click here for monthly tournaments!' : 'Change playlists'
 
   const renderMainContent = () => {
     if (!indicator) {
       if (randomizedPlaylists.length > 0) {
+
+        let shareContent = [...randomizedPlaylists];
+        shareContent.forEach(element => { element = element + `\n` });
+        shareContent = shareContent.join(`\n`);
+
         return (
           <div className="secondScreenMainCont">
             <ScrollArea
@@ -128,14 +143,23 @@ function App() {
                 )
               })}
             </ScrollArea>
-            <button className="secondScreenBtns" style={{ backgroundColor: 'blue' }}>
-              <img src={sharePic} className="btnImage" />
-              <p className="secondScreenBtnsText">SHARE</p>
+            <button onClick={() => copyToClipboard()} className="secondScreenBtns" style={{ backgroundColor: 'blue' }}>
+              <img alt='' src={copyPic} className="btnImage" />
+              <p className="secondScreenBtnsText">COPY</p>
             </button>
             <button onClick={() => choosePlaylists([])} className="secondScreenBtns" style={{ backgroundColor: 'purple' }}>
-              <img src={backPic} className="btnImage" />
+              <img alt='' src={backPic} className="btnImage" />
               <p className="secondScreenBtnsText">RANDOMIZE AGAIN</p>
             </button>
+
+            <ToastContainer />
+            <textarea
+            disabled
+              className="shareContentParagraph"
+              ref={textarea}
+              value={shareContent}
+            />
+
           </div>
         )
       } else {
@@ -145,9 +169,9 @@ function App() {
               <div className="numberofListsCont">
                 {allPlaylists.length > 1 &&
                   <button onClick={() => setIsOpen(true)} className="specialTournamentsCont">
-                    <img src={tournamentPic} className="btnImage" />
+                    <img alt='' src={tournamentPic} className="btnImage" />
                     <p className="specialTournamentsTitle">{topListsTitle}</p>
-                    <img src={tournamentPic} className="btnImage" />
+                    <img alt='' src={tournamentPic} className="btnImage" />
                   </button>
                 }
                 <p className='numberofListsText'>Total of {listsToShow.length} lists loaded</p>
@@ -162,7 +186,6 @@ function App() {
                 <p className="optionNumberText">RANDOMIZE</p>
               </button>
             </div>
-
           </div>
         )
       }
@@ -191,17 +214,17 @@ function App() {
     </p>
         {titles.map((title, i) => {
           if (i > 0) {
-            const last = i == titles.length - 1;
+            const last = i === titles.length - 1;
             return (
               <button onClick={() => onModalOptionClick(i)} key={i} className="tournamentOptionCont" style={{ borderBottomWidth: last ? 2 : 0 }}>
-                <img src={tournamentPicDark} className="btnImage" />
+                <img alt='' src={tournamentPicDark} className="btnImage" />
                 <p className="tournamentOptionText">{title}</p>
               </button>
             )
           }
         })}
         <button onClick={() => onModalOptionClick(0)} className="tournamentOptionCont backToRegularBtn">
-          <img src={backDarkPic} className="btnImage" />
+          <img alt='' src={backDarkPic} className="btnImage" />
           <p className="tournamentOptionText">REGULAR LISTS</p>
         </button>
       </div>
