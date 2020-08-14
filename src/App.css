@@ -216,6 +216,7 @@ button{
 
 .Toastify__toast {
   width: 85%;
+  margin: 0 auto;
 }
 
 

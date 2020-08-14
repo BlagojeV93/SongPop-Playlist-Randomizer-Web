@@ -112,10 +112,8 @@ function App() {
     )
   });
 
-  const copyToClipboard = () => {
-    let copyText = textarea.current;
-    copyText.select();
-    document.execCommand("copy");
+  const copyToClipboard = (textToCopy) => {
+    navigator.clipboard.writeText(textToCopy)
     toast("All lists copied to clipboard! Good luck!", { toastId: 'custom-id-yes' })
   }
 
@@ -143,7 +141,7 @@ function App() {
                 )
               })}
             </ScrollArea>
-            <button onClick={() => copyToClipboard()} className="secondScreenBtns" style={{ backgroundColor: 'blue' }}>
+            <button onClick={() => copyToClipboard(shareContent)} className="secondScreenBtns" style={{ backgroundColor: 'blue' }}>
               <img alt='' src={copyPic} className="btnImage" />
               <p className="secondScreenBtnsText">COPY</p>
             </button>
@@ -154,7 +152,7 @@ function App() {
 
             <ToastContainer progressClassName="Toastify__progress-bar--dark" draggablePercent={40}/>
             <textarea
-            disabled
+              disabled
               className="shareContentParagraph"
               ref={textarea}
               value={shareContent}
