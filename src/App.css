@@ -211,7 +211,13 @@ button{
   z-index: 1;
   opacity: 0;
   top: 0;
+  right: 0;
 }
+
+.Toastify__toast {
+  width: 85%;
+}
+
 
 @media only screen and (min-width: 768px) {
   .numberofListsText {
@@ -255,6 +261,9 @@ button{
   .tournamentOptionText{
     font-size: 22px;
     margin-left: 20px;
+  }
+  .Toastify__toast {
+    width: 100%;
   }
 }
 

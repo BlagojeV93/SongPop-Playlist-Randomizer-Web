@@ -152,7 +152,7 @@ function App() {
               <p className="secondScreenBtnsText">RANDOMIZE AGAIN</p>
             </button>
 
-            <ToastContainer />
+            <ToastContainer progressClassName="Toastify__progress-bar--dark" draggablePercent={40}/>
             <textarea
             disabled
               className="shareContentParagraph"
