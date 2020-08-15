@@ -5,6 +5,7 @@ import ScrollArea from 'react-scrollbar'
 import Spinner from 'react-spinkit'
 import Modal from 'react-modal';
 import { ToastContainer, toast } from 'react-toastify';
+import copy from 'copy-to-clipboard';
 import 'react-toastify/dist/ReactToastify.css';
 
 import copyPic from './assets/copy.png'
@@ -113,7 +114,7 @@ function App() {
   });
 
   const copyToClipboard = (textToCopy) => {
-    navigator.clipboard.writeText(textToCopy)
+    copy(textToCopy);
     toast("All lists copied to clipboard! Good luck!", { toastId: 'custom-id-yes' })
   }
 
