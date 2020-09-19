@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import ScrollArea from 'react-scrollbar'
@@ -46,7 +46,6 @@ function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const listsToShow = allPlaylists.length > 0 ? allPlaylists[chosenListsOrdinal].lists : [];
-  const textarea = useRef();
 
   useEffect(() => {
     loading(true);
@@ -152,12 +151,6 @@ function App() {
             </button>
 
             <ToastContainer progressClassName="Toastify__progress-bar--dark" draggablePercent={40}/>
-            <textarea
-              disabled
-              className="shareContentParagraph"
-              ref={textarea}
-              value={shareContent}
-            />
 
           </div>
         )
