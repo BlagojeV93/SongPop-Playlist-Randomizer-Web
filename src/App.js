@@ -19,7 +19,8 @@ const regularFileUri = 'https://songpophost.000webhostapp.com/allPlaylists.txt'
 const specialUri = 'https://songpophost.000webhostapp.com/special.txt'
 const options = [50, 60, 70, 90, 100, 150];
 
-const generateLink = link => `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`
+// const generateLink = link => `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`
+const generateLink = link => corseHelperUri + link
 
 const customModalStyle = {
   overlay: {
