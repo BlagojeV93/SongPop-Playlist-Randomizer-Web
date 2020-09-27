@@ -19,6 +19,8 @@ const regularFileUri = 'https://songpophost.000webhostapp.com/allPlaylists.txt'
 const specialUri = 'https://songpophost.000webhostapp.com/special.txt'
 const options = [50, 60, 70, 90, 100, 150];
 
+const generateLink = link => `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`
+
 const customModalStyle = {
   overlay: {
     backgroundColor: 'rgba(0,0,0,0.8)'
@@ -53,7 +55,7 @@ function App() {
   }, [])
 
   const getLists = async () => {
-    let content = await fetch(corseHelperUri + regularFileUri, {
+    let content = await fetch(generateLink(regularFileUri), {
       cache: "no-cache"
     }).then(res => res.text());
     content = content.split('•');
@@ -68,7 +70,7 @@ function App() {
   }
 
   const getSpecialLists = async (uri) => {
-    let lists = await fetch(corseHelperUri + uri, { cache: "no-cache" }).then(res => res.status === 200 ? res.text() : null)
+    let lists = await fetch(generateLink(uri), { cache: "no-cache" }).then(res => res.status === 200 ? res.text() : null)
       .catch(e => console.log(e, 'error special fetch'));
     if (lists) {
       lists = lists.split('•');
