@@ -14,13 +14,12 @@ import tournamentPic from './assets/cup.png'
 import tournamentPicDark from './assets/cup-dark.png'
 import backDarkPic from './assets/back-dark.png'
 
-const corseHelperUri = 'https://cors-anywhere.herokuapp.com/'
+// const corseHelperUri = 'https://cors-anywhere.herokuapp.com/'
 const regularFileUri = 'https://songpophost.000webhostapp.com/allPlaylists.txt'
 const specialUri = 'https://songpophost.000webhostapp.com/special.txt'
 const options = [50, 60, 70, 90, 100, 150];
 
-// const generateLink = link => `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`
-const generateLink = link => corseHelperUri + link
+const generateLink = link => `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`
 
 const customModalStyle = {
   overlay: {
@@ -47,6 +46,7 @@ function App() {
   const [indicator, loading] = useState(false);
   const [chosenListsOrdinal, setBool] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [customEntry, setCustom] = useState(false);
 
   const listsToShow = allPlaylists.length > 0 ? allPlaylists[chosenListsOrdinal].lists : [];
 
@@ -56,9 +56,10 @@ function App() {
   }, [])
 
   const getLists = async () => {
-    let content = await fetch(generateLink(regularFileUri), {
+    let res = await fetch(generateLink(regularFileUri), {
       cache: "no-cache"
-    }).then(res => res.text());
+    }).then(res => res.json());
+    let content = res.contents;
     content = content.split('•');
     content.shift();
     setAll(prevContent => {
@@ -71,9 +72,10 @@ function App() {
   }
 
   const getSpecialLists = async (uri) => {
-    let lists = await fetch(generateLink(uri), { cache: "no-cache" }).then(res => res.status === 200 ? res.text() : null)
+    let res = await fetch(generateLink(uri), { cache: "no-cache" }).then(res => res.json())
       .catch(e => console.log(e, 'error special fetch'));
-    if (lists) {
+    if (res.status.http_code == 200) {
+      let lists = res.contents
       lists = lists.split('•');
       lists.shift();
       const uri = lists[1].trim();
@@ -96,12 +98,25 @@ function App() {
     let stateArr = [];
     do {
       let val = listsToShow[Math.floor(Math.random() * listsToShow.length)].trim();
-      if (stateArr.indexOf(val) === -1 && val.length > 0) {
+      if (stateArr.indexOf(val) === -1) {
         stateArr.push(val);
       }
     } while (stateArr.length < numberToRandomize);
     stateArr = stateArr.map((val, i) => val = i + 1 + '. ' + val);
     choosePlaylists(stateArr);
+  }
+
+  const handleInputEntry = (val) => {
+    if (isNaN(val)) {
+      setNumber(0)
+    } else {
+      if (val >= listsToShow.length) {
+        toast("Too many lists :(", { toastId: 'custom-id-yes' })
+        setNumber(0)
+      } else {
+        setNumber(val)
+      }
+    }
   }
 
   const renderOptionButtons = options.map((opt, i) => {
@@ -123,6 +138,7 @@ function App() {
   const topListsTitle = chosenListsOrdinal === 0 ? 'Click here for monthly tournaments!' : 'Change playlists'
 
   const renderMainContent = () => {
+    const isDisabled = customEntry && numberToRandomize === 0;
     if (!indicator) {
       if (randomizedPlaylists.length > 0) {
 
@@ -148,12 +164,14 @@ function App() {
               <img alt='' src={copyPic} className="btnImage" />
               <p className="secondScreenBtnsText">COPY</p>
             </button>
-            <button onClick={() => choosePlaylists([])} className="secondScreenBtns" style={{ backgroundColor: 'purple' }}>
+            <button
+              onClick={() => { choosePlaylists([]); setNumber(options[0]); setCustom(false) }}
+              className="secondScreenBtns" style={{ backgroundColor: 'purple' }}>
               <img alt='' src={backPic} className="btnImage" />
               <p className="secondScreenBtnsText">RANDOMIZE AGAIN</p>
             </button>
 
-            <ToastContainer progressClassName="Toastify__progress-bar--dark" draggablePercent={40}/>
+            <ToastContainer progressClassName="Toastify__progress-bar--dark" draggablePercent={40} />
 
           </div>
         )
@@ -171,13 +189,10 @@ function App() {
                 }
                 <p className='numberofListsText'>Total of {listsToShow.length} lists loaded</p>
               </div>
-              <p className='chooseAmountText'>Choose the number of playlists to randomize</p>
-              <div className='optionsNumber'>
-                {renderOptionButtons}
-              </div>
+              {renderStandardOrCustom()}
             </div>
             <div className="innerBottom">
-              <button onClick={() => randomizeLists()} className='randomizeBtn'>
+              <button disabled={isDisabled} onClick={() => randomizeLists()} className='randomizeBtn'>
                 <p className="optionNumberText">RANDOMIZE</p>
               </button>
             </div>
@@ -190,6 +205,36 @@ function App() {
           <p className='loadingText'>Loading all playlists...Please wait...</p>
           <Spinner name='ball-spin-fade-loader' fadeIn='none' color='white' />
         </div>
+      )
+    }
+  }
+
+  const renderStandardOrCustom = () => {
+    if (customEntry) {
+      return (
+        <div className="customInputCont">
+          <p className='chooseAmountText'>Enter desired number of lists</p>
+          <input
+            className="customInput"
+            maxLength={4}
+            inputmode="numeric"
+            onChange={(e) => handleInputEntry(e.target.value)}
+          ></input>
+        </div>
+      )
+    } else {
+      return (
+        <>
+          <p className='chooseAmountText'>Choose the number of playlists to randomize</p>
+          <div className='optionsNumber'>
+            {renderOptionButtons}
+          </div>
+          <div className="customNumberButtonCont">
+            <button onClick={() => { setNumber(0); setCustom(true) }} className="customNumberButton">
+              <p className='enterCustomNuberText'>Enter custom number of lists</p>
+            </button>
+          </div>
+        </>
       )
     }
   }

@@ -219,6 +219,46 @@ button{
   margin: 0 auto;
 }
 
+.customNumberButtonCont {
+  display: flex;
+  height: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.customNumberButton {
+  display: flex;
+  border: white 2px solid;
+  border-radius: 100px;
+  background-color: purple;
+  justify-content: center;
+  align-items: center;
+}
+
+.enterCustomNuberText {
+  font-size: 16px;
+  color: whitesmoke;
+  margin: 10px;
+}
+
+.customInputCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  flex-direction: column;
+}
+
+.customInput {
+  width: 50%;
+  height: 30%;
+  background-color: rgba(0,0,0,0.8);
+  color: whitesmoke;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 
 @media only screen and (min-width: 768px) {
   .numberofListsText {
@@ -265,6 +305,14 @@ button{
   }
   .Toastify__toast {
     width: 100%;
+  }
+  .enterCustomNuberText{
+    font-size: 28px;
+    margin: 20px;
+  }
+  .customInput{
+    width: 30%;
+    font-size: 30px;
   }
 }
 
