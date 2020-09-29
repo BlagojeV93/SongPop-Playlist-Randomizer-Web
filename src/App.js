@@ -107,7 +107,7 @@ function App() {
   }
 
   const handleInputEntry = (val) => {
-    if (isNaN(val)) {
+    if (!(/^\d+$/.test(val))) {
       setNumber(0)
     } else {
       if (val >= listsToShow.length) {
@@ -138,7 +138,7 @@ function App() {
   const topListsTitle = chosenListsOrdinal === 0 ? 'Click here for monthly tournaments!' : 'Change playlists'
 
   const renderMainContent = () => {
-    const isDisabled = customEntry && numberToRandomize === 0;
+    const isDisabled = customEntry && numberToRandomize == 0;
     if (!indicator) {
       if (randomizedPlaylists.length > 0) {
 
@@ -217,7 +217,7 @@ function App() {
           <input
             className="customInput"
             maxLength={4}
-            inputmode="numeric"
+            inputMode="numeric"
             onChange={(e) => handleInputEntry(e.target.value)}
           ></input>
         </div>
