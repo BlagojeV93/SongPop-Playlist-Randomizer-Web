@@ -111,7 +111,6 @@ function App() {
       setNumber(0)
     } else {
       if (val >= listsToShow.length) {
-        toast("Too many lists :(", { toastId: 'custom-id-yes' })
         setNumber(0)
       } else {
         setNumber(val)
