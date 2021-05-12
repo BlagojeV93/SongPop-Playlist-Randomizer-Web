@@ -74,7 +74,7 @@ function App() {
   const getSpecialLists = async (uri) => {
     let res = await fetch(generateLink(uri), { cache: "no-cache" }).then(res => res.json())
       .catch(e => console.log(e, 'error special fetch'));
-    if (res.status.http_code == 200) {
+    if (res.status.http_code === 200) {
       let lists = res.contents
       lists = lists.split('•');
       lists.shift();
@@ -137,7 +137,7 @@ function App() {
   const topListsTitle = chosenListsOrdinal === 0 ? 'Click here for monthly tournaments!' : 'Change playlists'
 
   const renderMainContent = () => {
-    const isDisabled = customEntry && numberToRandomize == 0;
+    const isDisabled = customEntry && numberToRandomize === 0;
     if (!indicator) {
       if (randomizedPlaylists.length > 0) {
 
