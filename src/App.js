@@ -14,7 +14,6 @@ import tournamentPic from './assets/cup.png'
 import tournamentPicDark from './assets/cup-dark.png'
 import backDarkPic from './assets/back-dark.png'
 
-// const corseHelperUri = 'https://cors-anywhere.herokuapp.com/'
 const regularFileUri = 'https://songpoprandomizer.000webhostapp.com/allPlaylists.txt'
 const specialUri = 'https://songpoprandomizer.000webhostapp.com/special.txt'
 const options = [50, 60, 70, 90, 100, 150];
