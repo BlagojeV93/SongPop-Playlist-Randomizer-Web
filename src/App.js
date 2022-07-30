@@ -16,7 +16,7 @@ import backDarkPic from './assets/back-dark.png'
 
 const regularFileUri = 'https://songpoprandomizer.000webhostapp.com/allPlaylists.txt'
 const specialUri = 'https://songpoprandomizer.000webhostapp.com/special.txt'
-const options = [50, 60, 70, 90, 100, 150];
+const options = [50, 60, 75, 90, 100, 150];
 
 const generateLink = link => `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`
 
