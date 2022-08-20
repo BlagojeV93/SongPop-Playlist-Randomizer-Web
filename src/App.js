@@ -109,8 +109,8 @@ function App() {
     if (!(/^\d+$/.test(val))) {
       setNumber(0)
     } else {
-      if (val >= listsToShow.length) {
-        setNumber(0)
+      if (val > 1000) {
+        setNumber(1000)
       } else {
         setNumber(val)
       }
@@ -211,7 +211,7 @@ function App() {
     if (customEntry) {
       return (
         <div className="customInputCont">
-          <p className='chooseAmountText'>Enter desired number of lists</p>
+          <p className='chooseAmountText'>Enter desired number of lists (max 1000)</p>
           <input
             className="customInput"
             maxLength={4}
