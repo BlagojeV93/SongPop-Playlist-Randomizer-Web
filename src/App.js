@@ -56,6 +56,7 @@ function App() {
 
   const getLists = async () => {
     let res = await fetch(generateLink(regularFileUri), {
+
       cache: "no-cache"
     }).then(res => res.json());
     let content = res.contents;
