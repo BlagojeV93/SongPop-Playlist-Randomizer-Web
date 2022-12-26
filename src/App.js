@@ -18,8 +18,6 @@ const regularFileUri = 'https://songpoprandomizer.000webhostapp.com/allPlaylists
 const specialUri = 'https://songpoprandomizer.000webhostapp.com/special.txt'
 const options = [50, 60, 75, 90, 100, 150];
 
-const generateLink = link => `https://api.allorigins.win/get?url=${encodeURIComponent(link)}`
-
 const customModalStyle = {
   overlay: {
     backgroundColor: 'rgba(0,0,0,0.8)'
@@ -66,16 +64,14 @@ function App() {
       arr.push({ title: 'Regular Lists', lists: content })
       return arr;
     })
-    // await getSpecialLists(specialUri);
+    await getSpecialLists(specialUri);
     loading(false);
   }
 
-  const getSpecialLists = async (uri) => {
-    let res = await fetch(uri, { cache: "no-cache" })
-      .catch(e => console.log(e, 'error special fetch'));
-    res = await res.text()
-    if (res.status.http_code === 200) {
-      let lists = res.contents
+  const getSpecialLists = async (url) => {
+    try {
+      let res = await fetch(url, { cache: "no-cache" })
+      let lists = await res.text()
       lists = lists.split('•');
       lists.shift();
       const uri = lists[1].trim();
@@ -87,10 +83,11 @@ function App() {
         arr.push({ title, lists })
         return arr;
       })
-
       if (uri !== 'null') {
         getSpecialLists(uri)
       }
+    } catch (error) {
+      console.log(error)
     }
   }
 
