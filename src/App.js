@@ -112,6 +112,7 @@ function App() {
       if (val > 1000) {
         setNumber(1000)
       } else {
+        val = val > listsToShow.length ? listsToShow.length : val
         setNumber(val)
       }
     }
