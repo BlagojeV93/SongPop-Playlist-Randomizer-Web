@@ -55,11 +55,10 @@ function App() {
   }, [])
 
   const getLists = async () => {
-    let res = await fetch(generateLink(regularFileUri), {
-
+    const res = await fetch(regularFileUri, {
       cache: "no-cache"
-    }).then(res => res.json());
-    let content = res.contents;
+    })
+    let content = await res.text()
     content = content.split('•');
     content.shift();
     setAll(prevContent => {
@@ -67,13 +66,14 @@ function App() {
       arr.push({ title: 'Regular Lists', lists: content })
       return arr;
     })
-    await getSpecialLists(specialUri);
+    // await getSpecialLists(specialUri);
     loading(false);
   }
 
   const getSpecialLists = async (uri) => {
-    let res = await fetch(generateLink(uri), { cache: "no-cache" }).then(res => res.json())
+    let res = await fetch(uri, { cache: "no-cache" })
       .catch(e => console.log(e, 'error special fetch'));
+    res = await res.text()
     if (res.status.http_code === 200) {
       let lists = res.contents
       lists = lists.split('•');
@@ -251,7 +251,7 @@ function App() {
       <div className="mainModalCont">
         <p className="modalTitleText">
           You can select one of the active monthly tournaments below and randomize playlists for that special event!
-    </p>
+        </p>
         {titles.map((title, i) => {
           if (i > 0) {
             const last = i === titles.length - 1;
