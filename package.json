@@ -17,10 +17,10 @@
     "react-toastify": "^6.0.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
+    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
