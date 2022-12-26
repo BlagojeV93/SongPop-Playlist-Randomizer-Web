@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/SongPop-Playlist-Randomizer-Web/precache-manifest.9a9b3504ebac541fe112bcc6ca8a37d8.js"
+  "/SongPop-Playlist-Randomizer-Web/precache-manifest.4fabb71b4b152f730d45e9c162340878.js"
 );
 
 self.addEventListener('message', (event) => {
