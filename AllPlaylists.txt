@@ -1,4 +1,4 @@
-﻿* 311
+* 311
 * """And The""..."
 * """The"" Bands"
 * """The"" Songs"
@@ -538,6 +538,7 @@
 * 2022 Tomorrowland Spotlight
 * 2022 Tony Nominees
 * 2022 Video Music Awards
+* 2023 Coachela Spotlight
 * 2023 Grammy Nominees
 * 2023 Juno Awards
 * 20th Century Ballads
@@ -695,6 +696,7 @@
 * 70's Hit Artists: I
 * 70's Hit Artists: J
 * 70's Hit Artists: K
+* 70's Hit Artists: L
 * 70's Hit Singles: A 
 * 70's Hit Singles: B 
 * 70's Hit Singles: C 
@@ -3378,6 +3380,7 @@
 * Sam Cooke
 * Sam Smith 
 * Same … But Different?
+* Sampling the 80's
 * Santana 
 * Santana: Best Of
 * Sappy Songs 
@@ -4410,3 +4413,14 @@
 * Zodiac Signs
 * ZZ Top
 * ZZ Top: Best Of
+* Carly Simon: Best Of
+* Porter Robinson
+* 50's, 60's & 70's Classics
+* 2022 Best Latin
+* Pop Charts: Spring 1989
+* Uncut Albums: 2003
+* She Bangs the Drums
+* Quiet Storm
+* Tori Amos: Best Of
+* Primus
+* 80's Latin Pop
