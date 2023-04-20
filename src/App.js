@@ -14,7 +14,7 @@ import tournamentPic from './assets/cup.png'
 import tournamentPicDark from './assets/cup-dark.png'
 import backDarkPic from './assets/back-dark.png'
 
-const regularFileUri = 'https://songpoprandomizer.000webhostapp.com/allPlaylists.txt'
+const regularFileUri = 'https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/AllPlaylists.txt'
 const specialUri = 'https://songpoprandomizer.000webhostapp.com/special.txt'
 const options = [50, 60, 75, 90, 100, 150];
 
@@ -57,14 +57,14 @@ function App() {
       cache: "no-cache"
     })
     let content = await res.text()
-    content = content.split('•');
+    content = content.split('*');
     content.shift();
     setAll(prevContent => {
       let arr = [...prevContent];
       arr.push({ title: 'Regular Lists', lists: content })
       return arr;
     })
-    await getSpecialLists(specialUri);
+   // await getSpecialLists(specialUri);
     loading(false);
   }
 
