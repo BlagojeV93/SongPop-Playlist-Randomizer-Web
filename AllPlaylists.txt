@@ -2846,6 +2846,7 @@
 • Muzyka Pop
 • My Chemical Romance
 • Name Droppers 
+• Name That Album!
 • Name That Singer!
 • Nas
 • Nas: Best Of
@@ -3281,6 +3282,7 @@
 • Ricky Martin
 • Ricky Martin: Best Of
 • Ridiculously Long Song Titles
+• Riff On This!
 • Rihanna 
 • Rihanna: Best of 
 • Rise Against 
@@ -3326,7 +3328,7 @@
 • Rock Hall of Fame: 2015 
 • Rock Heroes
 • Rock Heroes, Vol. 2
-• Rock Heroes, Vol. 2
+• Rock Heroes, Vol. 3
 • Rock Hits & Misses
 • Rock in Rio Festival Retrospective
 • Rock Indé / Rock Inde
@@ -3446,6 +3448,7 @@
 • Simple Minds
 • Simple Plan 
 • Simple Plan: Best Of
+• Sing That Pop Chorus!
 • Sing your Heart Out!
 • Singalong Favorites!
 • Siouxsie & The Banshees
@@ -4684,3 +4687,4 @@
 • 2010's Hit Singles: G
 • Do It Again
 • Metal Masters
+• Glen Campbell: Best Of
