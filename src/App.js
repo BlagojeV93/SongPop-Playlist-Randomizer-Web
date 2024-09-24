@@ -74,10 +74,10 @@ function App() {
       let lists = await res.text()
       lists = lists.split('•');
       lists.shift();
+      lists.map(e => console.log(e))
       const uri = lists[1].trim();
       const title = lists[0].trim();
       lists.splice(0, 2);
-
       setAll(prevContent => {
         let arr = [...prevContent];
         arr.push({ title, lists })
@@ -285,5 +285,3 @@ function App() {
 }
 
 export default App;
-
-// Franternal Twins
