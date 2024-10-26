@@ -1,10 +1,10 @@
 • 311
-• """And The""..."
-• """The"" Bands"
-• """The"" Songs"
-• """Un""-listed"
-• """Weird Al"" Yankovic"
-• """Weird Al"" Yankovic: Best Of"
+• "And The"...
+• "The" Bands
+• "The" Songs
+• "Un"-listed
+• "Weird Al" Yankovic
+• "Weird Al" Yankovic: Best Of
 • #1 Country Hits!
 • #1 For One Week Only!
 • #1 Hits 1990-95 
@@ -5084,7 +5084,6 @@
 • Pop Charts: Fall 1997
 • 70's Hit Singles: T
 • All-Star Covers
-• Bad Blood
 • Drift Phonk
 • Luther Vandross: Best Of
 • The Rascals
@@ -5092,3 +5091,9 @@
 • Metal Mayhem 2024
 • Pop Charts: Fall 1977
 • Uncut Albums: 1984
+• Strange Feelings
+• My Chemical Romance: Best Of
+• Melanie Martinez
+• Lesser Heard 80's Pop
+• Nightmare Nightclub
+• #HOTlist: October '24
