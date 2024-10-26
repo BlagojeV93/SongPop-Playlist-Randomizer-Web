@@ -111,7 +111,7 @@ function App() {
         setNumber(1000)
       } else {
         val = val > listsToShow.length ? listsToShow.length : val
-        setNumber(val)
+        setNumber(parseInt(val))
       }
     }
   }
@@ -217,6 +217,9 @@ function App() {
             inputMode="numeric"
             onChange={(e) => handleInputEntry(e.target.value)}
           ></input>
+          <button onClick={() => setCustom(false)} className='backCustom'>
+            {'<< Back'}
+          </button>
         </div>
       )
     } else {
