@@ -15,7 +15,7 @@ import tournamentPicDark from './assets/cup-dark.png'
 import backDarkPic from './assets/back-dark.png'
 
 const regularFileUri = 'https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/AllPlaylists.txt'
-const specialUri = 'https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/special.txt'
+const specialUri = 'https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/rock.txt'
 const options = [50, 60, 75, 90, 100, 150];
 
 const customModalStyle = {
