@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6fe5178b4c7d37cb6be8607ea0ffccbd",
+    "revision": "359e5ce0f1a333c3f10d427a850f0011",
     "url": "/SongPop-Playlist-Randomizer-Web/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SongPop-Playlist-Randomizer-Web/static/css/2.0b144708.chunk.css"
   },
   {
-    "revision": "5cd0403bd81a948d297b",
+    "revision": "4304bab721edf2859113",
     "url": "/SongPop-Playlist-Randomizer-Web/static/css/main.13b7753d.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SongPop-Playlist-Randomizer-Web/static/js/2.16cb0bca.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5cd0403bd81a948d297b",
-    "url": "/SongPop-Playlist-Randomizer-Web/static/js/main.85e396c7.chunk.js"
+    "revision": "4304bab721edf2859113",
+    "url": "/SongPop-Playlist-Randomizer-Web/static/js/main.c28a9eb5.chunk.js"
   },
   {
     "revision": "4f97ab4b3d7e20196363",
