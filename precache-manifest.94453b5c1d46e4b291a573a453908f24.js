@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "33e3398547af0fb8f7cc1def07f7448d",
+    "revision": "6fe5178b4c7d37cb6be8607ea0ffccbd",
     "url": "/SongPop-Playlist-Randomizer-Web/index.html"
   },
   {
-    "revision": "8a6a5b970ea0489abf66",
+    "revision": "c2f58bbb8bc76338da5e",
     "url": "/SongPop-Playlist-Randomizer-Web/static/css/2.0b144708.chunk.css"
   },
   {
-    "revision": "90c1726209acf6fffa3c",
-    "url": "/SongPop-Playlist-Randomizer-Web/static/css/main.a8cf87ad.chunk.css"
+    "revision": "5cd0403bd81a948d297b",
+    "url": "/SongPop-Playlist-Randomizer-Web/static/css/main.13b7753d.chunk.css"
   },
   {
-    "revision": "8a6a5b970ea0489abf66",
-    "url": "/SongPop-Playlist-Randomizer-Web/static/js/2.30c374a0.chunk.js"
+    "revision": "c2f58bbb8bc76338da5e",
+    "url": "/SongPop-Playlist-Randomizer-Web/static/js/2.16cb0bca.chunk.js"
   },
   {
     "revision": "e7c69aa4549a0938e155d41214f1973f",
-    "url": "/SongPop-Playlist-Randomizer-Web/static/js/2.30c374a0.chunk.js.LICENSE.txt"
+    "url": "/SongPop-Playlist-Randomizer-Web/static/js/2.16cb0bca.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "90c1726209acf6fffa3c",
-    "url": "/SongPop-Playlist-Randomizer-Web/static/js/main.c51cae60.chunk.js"
+    "revision": "5cd0403bd81a948d297b",
+    "url": "/SongPop-Playlist-Randomizer-Web/static/js/main.85e396c7.chunk.js"
   },
   {
     "revision": "4f97ab4b3d7e20196363",
