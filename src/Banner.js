@@ -22,7 +22,7 @@ export default function Banner({ lists = [] }) {
   return (
     <div className="scroll-container">
       <div className="bannerTitleContainer">
-        <span className="bannerTitle">&#8595; === THE LATEST LISTS === &#8595;</span>
+        <span className="bannerTitle">&#8595; === RECENTLY ADDED LISTS === &#8595;</span>
       </div>
       <div
         className="scroll-track"
