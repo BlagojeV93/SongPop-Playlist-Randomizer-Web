@@ -13,7 +13,6 @@ import backPic from "./assets/back.png";
 import tournamentPic from "./assets/cup.png";
 import tournamentPicDark from "./assets/cup-dark.png";
 import backDarkPic from "./assets/back-dark.png";
-import Banner from "./Banner";
 
 const regularFileUri =
   "https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/AllPlaylists.txt";
@@ -45,11 +44,16 @@ function App() {
   const [numberToRandomize, setNumber] = useState(options[0]);
   const [indicator, loading] = useState(false);
   const [chosenListsOrdinal, setBool] = useState(0);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(null);
   const [customEntry, setCustom] = useState(false);
 
+  const lastAdded = allPlaylists[0]?.lists
+    .slice(allPlaylists[0]?.lists.length - 10, allPlaylists[0]?.lists.length)
+    .reverse();
   const listsToShow =
     allPlaylists.length > 0 ? allPlaylists[chosenListsOrdinal].lists : [];
+  const showSeeLastAdded =
+    chosenListsOrdinal === 0 && !randomizedPlaylists.length && !indicator;
 
   useEffect(() => {
     loading(true);
@@ -210,7 +214,7 @@ function App() {
               <div className="numberofListsCont">
                 {allPlaylists.length > 1 && (
                   <button
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => setIsOpen("special")}
                     className="specialTournamentsCont"
                   >
                     <img alt="" src={tournamentPic} className="btnImage" />
@@ -232,6 +236,14 @@ function App() {
               >
                 <p className="optionNumberText">RANDOMIZE</p>
               </button>
+              {showSeeLastAdded && (
+                <button
+                  onClick={() => setIsOpen("latest")}
+                  className="seeLatestListsBtn"
+                >
+                  <p className="seeLatestListsText">LATEST ADDED LISTS</p>
+                </button>
+              )}
             </div>
           </div>
         );
@@ -291,69 +303,72 @@ function App() {
 
   const onModalOptionClick = (i) => {
     setBool(i);
-    setIsOpen(false);
+    setIsOpen(null);
     setNumber(options[0]);
   };
 
   const renderModalCont = () => {
-    const titles = allPlaylists.map((e) => e.title);
-    return (
-      <div className="mainModalCont">
-        <p className="modalTitleText">
-          You can select one of the active monthly tournaments below and
-          randomize playlists for that special event!
-        </p>
-        {titles.map((title, i) => {
-          if (i > 0) {
-            const last = i === titles.length - 1;
-            return (
-              <button
-                onClick={() => onModalOptionClick(i)}
-                key={i}
-                className="tournamentOptionCont"
-                style={{ borderBottomWidth: last ? 2 : 0 }}
-              >
-                <img alt="" src={tournamentPicDark} className="btnImage" />
-                <p className="tournamentOptionText">{title}</p>
-              </button>
-            );
-          }
-          return <></>;
-        })}
-        <button
-          onClick={() => onModalOptionClick(0)}
-          className="tournamentOptionCont backToRegularBtn"
-        >
-          <img alt="" src={backDarkPic} className="btnImage" />
-          <p className="tournamentOptionText">REGULAR LISTS</p>
-        </button>
-      </div>
-    );
+    if (modalIsOpen === "latest") {
+      return (
+        <div className="latestListsContainer">
+          {lastAdded.map((list, i) => (
+            <div className="singleLatestList" key={i}>
+              <p className="latestListText">No.{listsToShow.length - i}&nbsp;&nbsp;{'---->'}&nbsp;&nbsp;</p>
+              <span style={{ fontWeight: '700'}} className="latestListText">
+                {list}
+              </span>
+            </div>
+          ))}
+        </div>
+      );
+    } else if (modalIsOpen === "special") {
+      const titles = allPlaylists.map((e) => e.title);
+      return (
+        <div className="mainModalCont">
+          <p className="modalTitleText">
+            You can select one of the active monthly tournaments below and
+            randomize playlists for that special event!
+          </p>
+          {titles.map((title, i) => {
+            if (i > 0) {
+              const last = i === titles.length - 1;
+              return (
+                <button
+                  onClick={() => onModalOptionClick(i)}
+                  key={i}
+                  className="tournamentOptionCont"
+                  style={{ borderBottomWidth: last ? 2 : 0 }}
+                >
+                  <img alt="" src={tournamentPicDark} className="btnImage" />
+                  <p className="tournamentOptionText">{title}</p>
+                </button>
+              );
+            }
+            return <></>;
+          })}
+          <button
+            onClick={() => onModalOptionClick(0)}
+            className="tournamentOptionCont backToRegularBtn"
+          >
+            <img alt="" src={backDarkPic} className="btnImage" />
+            <p className="tournamentOptionText">REGULAR LISTS</p>
+          </button>
+        </div>
+      );
+    }
   };
 
   return (
     <div className="appMain">
       {renderMainContent()}
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setIsOpen(false)}
+        isOpen={modalIsOpen !== null}
+        onRequestClose={() => setIsOpen(null)}
         style={customModalStyle}
         closeTimeoutMS={700}
       >
         {renderModalCont()}
       </Modal>
-      {chosenListsOrdinal === 0 &&
-        !randomizedPlaylists.length &&
-        !indicator && (
-          <Banner
-            lists={allPlaylists[0]?.lists
-              .slice(
-                allPlaylists[0]?.lists.length - 10,
-                allPlaylists[0]?.lists.length
-              )
-              .reverse()}
-          />
-        )}
     </div>
   );
 }

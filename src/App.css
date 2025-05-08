@@ -272,52 +272,37 @@ button {
   font-weight: 600;
 }
 
-.scroll-container {
-  width: 100%;
-  overflow: hidden;
+.seeLatestListsBtn {
   position: absolute;
   bottom: 0;
+  left: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.8);
+  padding: 5vw;
+  border-width: 1px;
+  border-color: whitesmoke;
 }
 
-.scroll-track {
-  display: inline-block;
-  white-space: nowrap;
-  animation-name: scrollLoop;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+.seeLatestListsText {
+  color: whitesmoke;
+  font-weight: 700;
+  font-size: large;
 }
-
-.scroll-content {
-  display: inline-flex;
-  white-space: nowrap;
+.latestListsContainer {
+  width: 100vw;
+  flex-direction: column;
 }
-
-.scroll-item {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: white;
-}
-
-.bannerTitleContainer {
+.singleLatestList {
   display: flex;
-  justify-content: center;
-  padding: 10px;
+  flex-direction: row;
+  margin: 15px;
 }
-
-.bannerTitle {
-  color: white;
-  font-size: 16px;
-}
-
-@keyframes scrollLoop {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.latestListText {
+  display: inline-block;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
 }
 
 @media only screen and (min-width: 768px) {
@@ -374,14 +359,18 @@ button {
     width: 30%;
     font-size: 30px;
   }
-
-  .scroll-item {
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
+  .seeLatestListsBtn {
+    padding: 5vw;
   }
-
-  .bannerTitle {
-    font-size: 25px;
+  .seeLatestListsText {
+    color: whitesmoke;
+    font-size: xx-large;
+  }
+  .singleLatestList {
+    margin: 35px;
+  }
+  .latestListText {
+    font-size: 30px;
   }
 }
 
@@ -397,6 +386,15 @@ button {
   }
   .mainModalCont {
     width: 60vw;
+  }
+  .seeLatestListsText {
+    font-size: x-large;
+  }
+  .seeLatestListsBtn {
+    padding: 1vw;
+  }
+  .latestListsContainer {
+    width: 40vw;
   }
 }
 
