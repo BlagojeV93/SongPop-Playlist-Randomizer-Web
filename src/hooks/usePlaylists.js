@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
 const regularFileUri =
-  "https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/assets/files/AllPlaylists.txt";
+  "https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/src/assets/files/AllPlaylists.txt";
 const specialUri =
-  "https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/assets/files/special.txt";
+  "https://raw.githubusercontent.com/BlagojeV93/SongPop-Playlist-Randomizer-Web/master/src/assets/files/special.txt";
 
 export const usePlaylists = () => {
   const [allPlaylists, setAll] = useState([]);
