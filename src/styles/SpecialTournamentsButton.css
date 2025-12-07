@@ -1,0 +1,27 @@
+.specialTournamentsCont {
+  display: flex;
+  height: 30%;
+  background-color: rgba(0, 0, 0, 0.8);
+  align-items: center;
+  padding: 0px 10px;
+  -webkit-animation: fadein 2s;
+  animation: fadein 2s;
+}
+
+.specialTournamentsTitle {
+  font-size: 14px;
+  margin: 0px 10px;
+  color: white;
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .specialTournamentsCont {
+    padding: 0px 25px;
+  }
+  .specialTournamentsTitle {
+    font-size: 26px;
+    margin: 0px 25px;
+  }
+}
+

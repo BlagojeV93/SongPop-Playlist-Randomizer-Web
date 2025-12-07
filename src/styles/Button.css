@@ -1,0 +1,18 @@
+button {
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+.btnImage {
+  width: 22px;
+  height: 22px;
+}
+
+@media only screen and (min-width: 768px) {
+  .btnImage {
+    width: 35px;
+    height: 35px;
+  }
+}
+

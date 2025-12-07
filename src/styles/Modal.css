@@ -1,0 +1,81 @@
+.mainModalCont {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitleText {
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.tournamentOptionCont {
+  display: flex;
+  background-color: #efefef;
+  align-items: center;
+  width: 100%;
+  border-top: 2px solid;
+  padding: 15px;
+}
+
+.tournamentOptionText {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.backToRegularBtn {
+  border: 0px;
+  background-color: rgb(200, 200, 200);
+}
+
+.latestListsContainer {
+  width: 100vw;
+  flex-direction: column;
+}
+
+.singleLatestList {
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+}
+
+.latestListText {
+  display: inline-block;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .modalTitleText {
+    font-size: 24px;
+    margin: 40px;
+  }
+  .tournamentOptionCont {
+    padding: 25px;
+  }
+  .tournamentOptionText {
+    font-size: 22px;
+    margin-left: 20px;
+  }
+  .singleLatestList {
+    margin: 35px;
+  }
+  .latestListText {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .mainModalCont {
+    width: 60vw;
+  }
+  .latestListsContainer {
+    width: 40vw;
+  }
+}
+
